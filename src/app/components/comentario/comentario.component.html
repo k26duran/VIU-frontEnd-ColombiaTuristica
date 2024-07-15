@@ -1,0 +1,23 @@
+<div class="card mb-3">
+    <div class="card-header">
+        Última modificación: 22/07/2024
+    </div>
+    <div class="row no-gutters">
+        <div class="col-md-8 contenedor-comentario">
+            <div class="card-body">
+                <h5 class="card-title">{{ comentario.nombre_autor }}</h5>
+                <p class="card-text">{{ comentario.descripcion }}</p>
+            </div>
+            <div class="listado">
+                <!--Añadir bucle para desplegar 3 recomendaciones maximo en cada comentario-->
+                <a class="btn recomendacion rounded-pill">Recomendación 1</a>
+                <a class="btn recomendacion rounded-pill">Recomendación 2</a>
+                <a class="btn recomendacion rounded-pill">Recomendación 3</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img src="https://media.staticontent.com/media/pictures/9495889e-54f9-40d2-939d-b04bf30b47c7"
+                class="card-img">
+        </div>
+    </div>
+</div>

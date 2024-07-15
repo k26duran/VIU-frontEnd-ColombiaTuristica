@@ -1,0 +1,16 @@
+.texto-descripcion {
+    font-size: larger;
+
+    height: 100%;
+    /* Ocupar todo el alto disponible */
+    overflow: hidden;
+    /* Ocultar el texto que se desborda */
+    text-overflow: ellipsis;
+    /* Mostrar puntos suspensivos (...) cuando se trunca el texto */
+    white-space: normal;
+    /* Permitir que el texto se divida en múltiples líneas */
+}
+
+h1{
+    margin: 2%;
+}

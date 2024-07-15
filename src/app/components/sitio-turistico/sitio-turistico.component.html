@@ -1,0 +1,38 @@
+<div class="container">
+@if (sitioTuristico) {
+    <div class="card mb-3 sitio">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ sitioTuristico.image_path }}" class="card-img img-fluid" alt="{{ sitioTuristico.nombre }}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h1 class="card-title">{{ sitioTuristico.nombre }}</h1>
+              <p class="card-text texto-descripcion text-truncate">{{ sitioTuristico.descripcion}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+     <div class="col-md-3">
+        <h3>Recomendaciones</h3>
+        <ul>
+            <li>Bloqueador</li>
+            <li>Bloqueador</li>
+            <li>Bloqueador</li>
+        </ul>
+     </div>
+     <div class="col-md-9">    
+        <h3>Comentarios</h3>
+        @if(sitioTuristico.comentarios) {
+        @for(comentario2 of sitioTuristico.comentarios; track $index) {
+            <app-comentario [comentario]=comentario2></app-comentario>
+        }
+        }
+    </div> 
+    </div> <!--Row-->
+}
+@else {
+    <h2>No hay información disponibles</h2>
+}
+</div>

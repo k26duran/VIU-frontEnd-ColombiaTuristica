@@ -1,0 +1,45 @@
+<div class="container">
+@if (ciudad) {
+    <div class="card mb-3 ciudad">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ ciudad.image_path }}" class="card-img img-fluid" alt="{{ ciudad.nombre }}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h1 class="card-title">{{ ciudad.nombre }}</h1>
+              <p class="card-text texto-descripcion text-truncate">{{ ciudad.descripcion}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center">Sitios Turísticos</h2>
+        <div class="card-deck">
+        @for(sitioTuristico of ciudad.sitiosTuristicos; track $index) {
+        <div class="card mb-3" (click)="verSitioTuristico(sitioTuristico)">
+          <div class="row no-gutters">
+            <div class="col-md-3">
+                <img src="{{ sitioTuristico.image_path }}" class="card-img img-fluid img_sitio" alt="{{ sitioTuristico.nombre }}">
+            </div>
+            <div class="col-md-9">
+             <div class="card-body">
+              <h5 class="card-title">{{ sitioTuristico.nombre }}</h5> 
+              <p class="card-text">{{ sitioTuristico.descripcion }}</p>
+             </div>
+            </div>
+          </div>
+        </div>
+        }
+        </div>
+      </div>
+    </div>
+    
+
+}
+@else {
+    <h2>No hay información disponibles</h2>
+}
+</div>

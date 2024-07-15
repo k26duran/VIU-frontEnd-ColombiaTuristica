@@ -1,0 +1,13 @@
+.recomendacion{
+    background-color: aquamarine;
+    margin-left: 2%;
+}
+.listado{
+    margin-bottom: 1%;
+    margin-top: auto;
+}
+
+.contenedor-comentario{
+    display: flex;
+    flex-direction: column;
+}

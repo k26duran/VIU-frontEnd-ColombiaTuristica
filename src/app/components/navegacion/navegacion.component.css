@@ -1,3 +1,6 @@
+.body-color{
+  background-color: rgba(166, 190, 182, 0.432);
+}
 a{
     font-size: larger;
 }
@@ -6,6 +9,27 @@ form{
     margin-right: 10%;
 }
 
-ul{
+.menu{
 margin-left: 5%;
+}
+
+.search-container {
+  position: relative;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border: 1px solid #ccc;
+  border-top: none;
+  background-color: white;
+  max-height: 200px; /* Puedes ajustar la altura máxima */
+  overflow-y: auto;
+}
+
+.suggestions .list-group-item {
+  cursor: pointer;
 }

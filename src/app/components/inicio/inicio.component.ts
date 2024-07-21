@@ -18,11 +18,17 @@ export class InicioComponent {
 
   constructor(private ciudadService: CiudadService, private router: Router){
     this.titulo = "Universidad de Valencia";
-    this.ciudades = this.ciudadService.getCiudades();
+    this.ciudades = [];
+
+    this.ciudadService.getCiudades().subscribe({
+      next:(info) => {
+        this.ciudades = info.data;
+      },
+      error:(error) => {console.log("Error: ", error)}});
   }
 
   verCiudad(ciudad: Ciudad): void {
-    // Redirigir a la página de ciudad 
+    // Redirigir a la página de ciudad
     this.router.navigate(['/ciudad', ciudad.id]);
   }
 }

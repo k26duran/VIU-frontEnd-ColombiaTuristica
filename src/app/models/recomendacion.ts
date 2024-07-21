@@ -1,7 +1,8 @@
 export class Recomendacion{
     constructor(
-        public valor:string
+        public id:number,
+        public nombre:string
     ){
-        
+
     }
 }

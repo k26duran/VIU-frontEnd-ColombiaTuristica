@@ -3,11 +3,14 @@
     <div class="card mb-3 sitio">
         <div class="row no-gutters">
           <div class="col-md-4">
-            <img src="{{ sitioTuristico.image_path }}" class="card-img img-fluid" alt="{{ sitioTuristico.nombre }}">
+            <img src="{{ sitioTuristico.foto }}" class="card-img img-fluid" alt="{{ sitioTuristico.nombre }}">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 contenedor">
             <div class="card-body">
               <h1 class="card-title">{{ sitioTuristico.nombre }}</h1>
+              <div class="star-rating">
+                <div *ngFor="let estrella of estrellas" class="star" [ngClass]="estrella"></div>
+              </div>
               <p class="card-text texto-descripcion text-truncate">{{ sitioTuristico.descripcion}}</p>
             </div>
           </div>
@@ -17,22 +20,88 @@
      <div class="col-md-3">
         <h3>Recomendaciones</h3>
         <ul>
-            <li>Bloqueador</li>
-            <li>Bloqueador</li>
-            <li>Bloqueador</li>
+          @if(sitioTuristico.recomendaciones) {
+            @for(r of sitioTuristico.recomendaciones; track $index) {
+              <li>
+                <app-recomendacion [recomendacion]=r></app-recomendacion>
+              </li>
+            }}
         </ul>
      </div>
-     <div class="col-md-9">    
+     <div class="col-md-9">
+      <div class="d-flex justify-content-between align-items-center">
         <h3>Comentarios</h3>
+        <!-- Botón para abrir el modal -->
+        <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+          Añadir Comentario
+        </button>
+      </div>
         @if(sitioTuristico.comentarios) {
         @for(comentario2 of sitioTuristico.comentarios; track $index) {
             <app-comentario [comentario]=comentario2></app-comentario>
         }
         }
-    </div> 
+    </div>
     </div> <!--Row-->
 }
 @else {
     <h2>No hay información disponibles</h2>
 }
+</div>
+<!-- Modal para crear un nuevo comentario -->
+<div class="modal fade" id="addCommentModal" tabindex="-1" aria-labelledby="addCommentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCommentModalLabel">Añadir Nuevo Comentario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Alerta de éxito -->
+        <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ successMessage }}
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert()"></button>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" #commentForm="ngForm">
+          <!-- Sección para escribir el comentario -->
+          <div class="mb-3">
+            <label for="commentText" class="form-label">Comentario</label>
+            <textarea class="form-control" id="commentText" name="commentText" rows="3" #commentText="ngModel" [(ngModel)]="newComment.text" required></textarea>
+          </div>
+
+          <!-- Sección para elegir una calificación -->
+          <div class="mb-3">
+            <label class="form-label">Calificación</label>
+            <div>
+              <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+                <div class="form-check mb-2">
+                  <input type="radio" id="rating{{rating}}" name="rating" [value]="rating" #rating="ngModel" [(ngModel)]="newComment.rating" class="form-check-input">
+                  <label for="rating{{rating}}" class="form-check-label">{{rating}}</label>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <!-- Sección para añadir URLs de imágenes -->
+          <div class="mb-3">
+            <label for="photoUrls" class="form-label">URLs de Imágenes</label>
+            <input name="photoUrls" class="form-control" id="photoUrls" type="text" placeholder="Introduce las URLs de las imágenes separadas por comas" [(ngModel)]="newComment.photoUrls" (ngModelChange)="updateImageUrls()">
+            <div class="mt-2" *ngIf="imageUrls.length > 0">
+              <h6>Previsualización de Imágenes:</h6>
+              <div class="d-flex flex-wrap">
+                <img *ngFor="let image of imageUrls" [src]="image" class="img-thumbnail me-2 mb-2" style="width: 100px; height: 100px; object-fit: cover;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar Comentario</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

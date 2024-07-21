@@ -4,9 +4,10 @@ export class Ciudad{
         public id:number,
         public nombre: string,
         public descripcion: string,
-        public image_path: string,
-        public sitiosTuristicos: Array<SitioTuristico>
+        public foto: string,
+        public sitiosTuristicos: Array<SitioTuristico>,
+        public calificacion: number
     ){
-        
+
     }
 }
